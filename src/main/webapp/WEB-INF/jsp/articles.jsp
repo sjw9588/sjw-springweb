@@ -13,7 +13,7 @@
 		<button type="submit">조회</button>
 	</form>
 	<p>
-		<a href="./app/article/addForm">글쓰기</a>
+		<a href="./app/article/step1">글쓰기</a>
 	</p>
 	<table>
 		<thead>
