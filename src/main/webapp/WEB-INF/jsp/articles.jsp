@@ -6,6 +6,7 @@
 <title>글 목록</title>
 </head>
 <body>
+
 	<p>전체 ${totalCount }건</p>
 	<form action="./app/articles">
 		<input type="number" name="page" value="${param.page }" placeholder="페이지"
@@ -13,7 +14,7 @@
 		<button type="submit">조회</button>
 	</form>
 	<p>
-		<a href="./app/article/step1">글쓰기</a>
+		<a href="./app/article/addForm">글쓰기</a>
 	</p>
 	<table>
 		<thead>
@@ -28,7 +29,7 @@
 		<tbody>
 			<c:forEach var="article" items="${articles}">
 				<tr>
-					<td><a href = "./app/article/check?articleId=${article.articleId}">${article.articleId }</a></td>
+					<td><a href = "./app/article/view?articleId=${article.articleId}">${article.articleId }</a></td>
 					<td>${article.title }</td>
 					<td>${article.userId }</td>
 					<td>${article.name }</td>

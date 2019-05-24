@@ -16,11 +16,6 @@ public interface ArticleDao {
 	void insert(Article article);
 
 	/**
-	 * 글 수정
-	 */
-	void update(Article article);
-
-	/**
 	 * 글 목록
 	 */
 	List<Article> selectAll(int offset, int count);
@@ -31,4 +26,17 @@ public interface ArticleDao {
 	int countAll();
 	
 	Article getArticle(String article) ;
+	/**
+	 * 수정
+	 * 
+	 * @return 수정된 행의 갯수
+	 */
+	int updateArticle(Article article);
+
+	/**
+	 * 삭제
+	 * 
+	 * @return 삭제된 행의 갯수
+	 */
+	int deleteArticle(String articleId);
 }
