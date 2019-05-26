@@ -22,8 +22,10 @@
 	<p>${article.contentHtml }</p>
 	<hr />
 	<p>
-	<span><a href="./app/article/update">글수정</a></span> | 
-	<span><a href="./app/article/delete">글삭제</a></span>
+	<c:if test = "${article.userId == sessionScope.MEMBER.memberId }">
+	<a href='<c:url value='./app/article/update?articleId=${article.articleId }'/>' >수정</a>
+	<a href='<c:url value='./app/article/delete?articleId=${article.articleId }'/>' >삭제</a>
+	</c:if>
 	</p>
 </body>
 </html>

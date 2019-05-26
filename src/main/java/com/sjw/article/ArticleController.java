@@ -10,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
@@ -29,13 +28,6 @@ public class ArticleController {
 
 	static final Logger logger = LogManager.getLogger();
 
-	@RequestMapping("/main1")
-	public String main() {
-		return "main1";
-	}
-
-	
-	
 	
 	@GetMapping("/article/view")
 	public void check(@RequestParam("articleId") String articleId,
@@ -45,24 +37,23 @@ public class ArticleController {
 	}
 
 	
-	@GetMapping("/articles")
-	public String articles(
+	/**
+	 * 글 목록
+	 */
+	@GetMapping("/article/list")
+	public void articleList(
 			@RequestParam(value = "page", defaultValue = "1") int page,
 			Model model) {
 
-		// 페이지 당 가져오는 행의 수
+		// 페이지당 행의 수와 페이지의 시작점
 		final int COUNT = 100;
-		// 시작점
 		int offset = (page - 1) * COUNT;
-
-		List<Article> articleList = articleDao.selectAll(offset, COUNT);
-
-		int totalCount = articleDao.countAll();
 		
+		List<Article> articleList = articleDao.selectAll(offset, COUNT);
+		int totalCount = articleDao.countAll();
 		model.addAttribute("totalCount", totalCount);
-		model.addAttribute("articles", articleList);
-		return "articles";
-	}
+		model.addAttribute("articleList", articleList);
+}
 	
 /**
  * 
@@ -76,23 +67,35 @@ public class ArticleController {
 	
 
 	@GetMapping("/article/update")
-	public String articleUpdate(HttpSession session) {
+	public String articleUpdate(
+			Article article,
+			@SessionAttribute("MEMBER") Member member) {
+
+		articleDao.updateArticle(article);
+		//"articleId") Article article,@SessionAttribute("MEMBER") Member member,Model model) {
+		
+		//@SessionAttribute("MEMBER") Member member)
+		//articleDao.updateArticle(article);
 		return "article/update";
 	}
 	
 
 	@GetMapping("/article/delete")
-	public String articleDelete(HttpSession session) {
+	public String articleDelete (String articleId,
+			@SessionAttribute("MEMBER") Member member) {
+		articleDao.deleteArticle(articleId);
 		return "article/delete";
+		
 	}
 	
 	@PostMapping("/article/add")
-	public String articleAdd(Article article,
+	public String articleAdd(Article article,	
 			@SessionAttribute("MEMBER") Member member){
 			article.setUserId(member.getMemberId());
 			article.setName(member.getName());
 			articleDao.insert(article);	
-			return "redirect:/app/articles";
+			return "redirect:/app/article/add";
 
 	}
+	
 }

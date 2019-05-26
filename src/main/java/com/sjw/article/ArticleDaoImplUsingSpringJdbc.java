@@ -24,6 +24,7 @@ public class ArticleDaoImplUsingSpringJdbc implements ArticleDao {
 	static final String COUNT_ALL = "SELECT count(articleId) count FROM article";
 	
 	static final String GET_ARTICLE = "SELECT * from article where articleId=?";
+	
 	static final String UPDATE_ARTICLE = "UPDATE article SET title=?, content=? WHERE articleId=?";
 	/**
 	 * 글 삭제하는 sql
@@ -57,11 +58,13 @@ public class ArticleDaoImplUsingSpringJdbc implements ArticleDao {
 	public int countAll() {
 		return jdbcTemplate.queryForObject(COUNT_ALL, Integer.class);
 	}
+	
 	@Override
 	public Article getArticle(String articleId) {
 		return jdbcTemplate.queryForObject(GET_ARTICLE,
 				new BeanPropertyRowMapper<>(Article.class), articleId);
 	}
+	
 	/**
 	 * 글 수정
 	 */
