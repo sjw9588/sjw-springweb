@@ -67,16 +67,15 @@ public class ArticleController {
 	
 
 	@GetMapping("/article/update")
-	public String articleUpdate(
-			Article article,
-			@SessionAttribute("MEMBER") Member member) {
+	public String articleUpdate(@RequestParam("articleId") Article article,
+			Model model) {
 
 		articleDao.updateArticle(article);
+		model.addAttribute("article",article);
 		//"articleId") Article article,@SessionAttribute("MEMBER") Member member,Model model) {
 		
 		//@SessionAttribute("MEMBER") Member member)
-		//articleDao.updateArticle(article);
-		return "article/update";
+		return "redirect:/app/article/update";
 	}
 	
 

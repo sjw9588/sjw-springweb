@@ -13,12 +13,12 @@
 	</p>
 	<form action="./app/article/add" method="post">
 		<p>
-			<label>제목 :</label><br /> <input type="title" name="title"
-				value="${param.title }" required />
+			<label>제목 :</label><br /> <input type="text" name="title" maxlength="100" style="width: 100%;"
+				value="${article.title }" required />
 		</p>
 		<p>
-			<label>내용 : </label><br /> <input type="content" name="content"
-				value="${param.content}" required />
+			<label>내용 : </label><br /> <textarea name="content" style="width: 100%; height: 200px;"
+				value="${article.content}" required />
 		</p>
 		<p>
 		
