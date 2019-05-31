@@ -13,7 +13,7 @@ public interface ArticleDao {
 	/**
 	 * 작성된 글 저장
 	 */
-	void insert(Article article);
+	void addArticle(Article article);
 
 	/**
 	 * 글 목록
@@ -38,5 +38,5 @@ public interface ArticleDao {
 	 * 
 	 * @return 삭제된 행의 갯수
 	 */
-	int deleteArticle(String articleId);
+	int deleteArticle(String articleId,String userId);
 }

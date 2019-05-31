@@ -25,11 +25,11 @@ public class ArticleDaoImplUsingSpringJdbc implements ArticleDao {
 	
 	static final String GET_ARTICLE = "SELECT * from article where articleId=?";
 	
-	static final String UPDATE_ARTICLE = "UPDATE article SET title=?, content=? WHERE articleId=?";
+	static final String UPDATE_ARTICLE = "UPDATE article SET title=?, content=? WHERE (articleId,userId) =(?,?)";
 	/**
 	 * 글 삭제하는 sql
 	 */
-	static final String DELETE_ARTICLE = "DELETE FROM article WHERE articleId=?";
+	static final String DELETE_ARTICLE = "DELETE FROM article WHERE (articleId, userId) = (?,?)";
 
 	@Autowired
 	JdbcTemplate jdbcTemplate;
@@ -42,7 +42,7 @@ public class ArticleDaoImplUsingSpringJdbc implements ArticleDao {
 	 * p.201 [리스트 8.12]의 insert() 메서드 수정
 	 */
 	@Override
-	public void insert(Article article) {
+	public void addArticle(Article article) {
 		jdbcTemplate.update(INSERT, article.getTitle(), article.getContent(),
 										article.getUserId(),article.getName());
 	}
@@ -71,14 +71,14 @@ public class ArticleDaoImplUsingSpringJdbc implements ArticleDao {
 	@Override
 	public int updateArticle(Article article) {
 		return jdbcTemplate.update(UPDATE_ARTICLE, article.getTitle(),
-				article.getContent(), article.getArticleId());
+				article.getContent(), article.getArticleId(), article.getUserId());
 	}
 
 	/**
 	 * 글 삭제
 	 */
 	@Override
-	public int deleteArticle(String articleId) {
-		return jdbcTemplate.update(DELETE_ARTICLE, articleId);
+	public int deleteArticle(String articleId, String userId) {
+		return jdbcTemplate.update(DELETE_ARTICLE, articleId, userId);
 	}
 }
