@@ -24,14 +24,19 @@
 	</p>
 	<hr />
 	<p>
-		<span>번호 : ${letter.letterId }</span>  
+		<span>편지 번호 : ${letter.letterId }</span>  
 	</p>
 	<p>
 		<span>내 아이디 : ${letter.senderId }</span> | <span> 내 이름 : ${letter.senderName }</span>
 	</p>
+	<hr />
 	<p>
-		<span style="font-weight: bold;">제목 : ${letter.title }</span> | <span>내용 : ${letter.content }</span>
+		<span style="font-weight: bold;">제목 : ${letter.title }</span>
 	</p>
+	<p>
+		<span style="font-weight: bold;">내용 : ${letter.content }</span>
+	</p>
+	<hr />
 	<p>
 		<span>상대방 아이디 : ${letter.receiverId }</span> | <span>상대방 이름 : ${letter.receiverName }</span>
 	</p>
