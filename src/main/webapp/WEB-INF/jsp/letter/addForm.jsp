@@ -13,13 +13,10 @@
 		<a href="./app/letter/listReceived">받은 목록</a>
 	</p>
 	<form action="./app/letter/add" method="post">
-		<p>받는 사람 ID :</p>
-		<p>
-			<input type="text" name="receiverId" maxlength="100" style="width: 100%;" required>
-		</p>
-		<p>상대방 이름 :</p>
-		<p>
-			<input type="text" name="receiverName" maxlength="100" style="width: 100%;" required>
+		<p>받는 사람 :</p>
+		<p><input type="text" name="receiverId" value="${param.receiverId }"
+				readonly /> | <input type="text" name="receiverName"
+				value="${param.receiverName }" readonly />
 		</p>
 		<p>제목 :</p>
 		<p>

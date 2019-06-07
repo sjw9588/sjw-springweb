@@ -18,7 +18,7 @@ import com.sjw.book.chap11.MemberDao;
  * p.366 [리스트 13.17] ChangePwdController 수정<br/>
  * ChangePasswordService를 만들지 않고 컨트롤러에서 직접 Dao를 호출함
  * 
- * @author Jacob
+ * @author sjw
  */
 @Controller
 public class MemberController {
@@ -26,21 +26,11 @@ public class MemberController {
 	@Autowired
 	MemberDao memberDao;
 
-	@RequestMapping("/member/memberInfo")
-	public String memberInfo(HttpSession session) {
-		return "member/memberInfo";
-	}
-
-	@RequestMapping("/member/changePwdForm")
-	public String changePwdForm(HttpSession session) {
-		return "member/changePwdForm";
-	}
-
 	@PostMapping("/member/changePwd")
 	public String submit(
 			@RequestParam("currentPassword") String currentPassword,
 			@RequestParam("newPassword") String newPassword,
-			@SessionAttribute("MEMBER")Member member, Model model) {
+			@SessionAttribute("MEMBER") Member member, Model model) {
 		int updatedRows = memberDao.changePassword(member.getMemberId(),
 				currentPassword, newPassword);
 
